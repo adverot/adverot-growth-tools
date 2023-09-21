@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "legit": "^1.0.9",
+    "smtp-ping": "^1.0.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

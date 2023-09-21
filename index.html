@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Growth Tools</title>
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <h1>Email Checker</h1>
+    <form id="email-checker" style="display: flex; justify-content: space-around;">
+        <div id="group-prenom">
+            <label for="prenom">Prénom : </label>
+            <input type="text" name="prenom" id="prenom" placeholder="John">
+        </div>
+        <div id="group-nom">
+            <label for="nom">Nom : </label>
+            <input type="text" name="nom" id="nom" placeholder="Doe">
+        </div>
+        <div id="group-domaine">
+            <label for="domaine">Domaine : </label>
+            <input type="text" name="domaine" id="domaine" placeholder="domaine.com">
+        </div>
+        <input type="submit" value="Check">
+    </form>
+    <h3 id="resultat" style="text-align: center;"></h3>
+    <script type="module" src="./app.mjs"></script>
+</body>
+</html>
