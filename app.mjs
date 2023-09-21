@@ -9,5 +9,5 @@ document.getElementById('email-checker').addEventListener('submit', (event) => {
     const domain = document.getElementById('domaine').value;
     zoneResultat.innerText = '';
     const mails = buildMails(removeAccents(prenom), removeAccents(nom));
-    
+    console.log(mails);
 });
