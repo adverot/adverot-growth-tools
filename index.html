@@ -1,29 +1,40 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Growth Tools</title>
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Tools</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
-<body>
-    <h1>Email Checker</h1>
-    <form id="email-checker" style="display: flex; justify-content: space-around;">
-        <div id="group-prenom">
-            <label for="prenom">Prénom : </label>
-            <input type="text" name="prenom" id="prenom" placeholder="John">
+
+<body class="vh-100">
+    <main class="container h-100 my-4">
+        <h1 class="mb-5">Email Checker</h1>
+        <form id="email-checker" class="d-flex flex-column">
+            <div class="d-flex justify-content-between mt-3">
+                <div class="d-flex flex-column w-100">
+                    <label for="prenom" class="mx-auto my-1">Prénom</label>
+                    <input type="text" name="prenom" id="prenom" placeholder="John">
+                </div>
+                <div class="d-flex flex-column w-100">
+                    <label for="nom" class="mx-auto my-1">Nom</label>
+                    <input type="text" name="nom" id="nom" placeholder="Doe">
+                </div>
+                <div class="d-flex flex-column w-100">
+                    <label for="domaine" class="mx-auto my-1">Domaine</label>
+                    <input type="text" name="domaine" id="domaine" placeholder="domaine.com">
+                </div>
+            </div>
+            <input type="submit" value="Check" class="mx-auto my-5 w-25 btn btn-primary">
+        </form>
+        <div class="d-flex justify-content-center">
+            <div id="resultat"></div>
         </div>
-        <div id="group-nom">
-            <label for="nom">Nom : </label>
-            <input type="text" name="nom" id="nom" placeholder="Doe">
-        </div>
-        <div id="group-domaine">
-            <label for="domaine">Domaine : </label>
-            <input type="text" name="domaine" id="domaine" placeholder="domaine.com">
-        </div>
-        <input type="submit" value="Check">
-    </form>
-    <h3 id="resultat" style="text-align: center;"></h3>
+    </main>
     <script type="module" src="./app.mjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

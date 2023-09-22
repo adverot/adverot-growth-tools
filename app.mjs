@@ -3,28 +3,42 @@ import removeAccents from './utils/removeAccents.js';
 
 document.getElementById('email-checker').addEventListener('submit', async (event) => {
     event.preventDefault();
-    const zoneResultat = document.getElementById('resultat');
+    const resultat = document.getElementById('resultat');
     const prenom = document.getElementById('prenom').value;
     const nom = document.getElementById('nom').value;
     const domain = document.getElementById('domaine').value;
-    zoneResultat.innerText = '';
+    resultat.innerText = '';
+    resultat.className = 'spinner-border';
     let message = '';
-    const mails = buildMails(removeAccents(prenom), removeAccents(nom));
-    const mailsQuery = mails.map(mail => `mails=${encodeURIComponent(mail)}`).join('&');
-    const url = `http://localhost:8888/.netlify/functions/findMail?${mailsQuery}&domain=${encodeURIComponent(domain)}`;
-    const response = await fetch(url).then(response => response.json());
-    switch (response.mxStatus) {
-        case 'NO_MX':
-            message = `Le domaine ${domain} n'a pas d'enregistrement MX valide.`
-            break;
-        case 'ACCEPT_ALL':
-            message = `Le domaine ${domain} est paramétré en Accept All.`
-            break;
-        case 'OK':
-            message = response.mail;
-            break;
-        default:
-            message = '!! ERREUR !!'
+    let alertType = '';
+
+    const domainPattern = /^(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+    if (!domainPattern.test(domain)) {
+        message = "Domaine invalide";
+        alertType = 'alert-secondary';
+    } else {
+        const mails = buildMails(removeAccents(prenom), removeAccents(nom));
+        const mailsQuery = mails.map(mail => `mails=${encodeURIComponent(mail)}`).join('&');
+        const url = `https://adverot-growth-tools.netlify.app/.netlify/functions/findMail?${mailsQuery}&domain=${encodeURIComponent(domain)}`;
+        const response = await fetch(url).then(response => response.json());
+        switch (response.mxStatus) {
+            case 'NO_MX':
+                message = `Le domaine ${domain} n'a pas d'enregistrement MX valide.`;
+                alertType = 'alert-danger';
+                break;
+            case 'ACCEPT_ALL':
+                message = `Le domaine ${domain} est paramétré en Accept All.`
+                alertType = 'alert-warning'
+                break;
+            case 'OK':
+                message = response.mail !== '' ? response.mail : "Pas d'adresse mail trouvée";
+                alertType = response.mail !== '' ? 'alert-success' : 'alert-dark';
+                break;
+            default:
+                message = '!! ERREUR !!'
+                alertType = 'alert-dark'
+        }
     }
-    zoneResultat.innerText = message;
+    resultat.className = 'w-100 text-center alert ' + alertType;
+    resultat.innerText = message;
 });
