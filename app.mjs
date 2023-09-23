@@ -1,8 +1,11 @@
 import buildMails from './utils/buildMails.js';
 import removeAccents from './utils/removeAccents.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 document.getElementById('email-checker').addEventListener('submit', async (event) => {
     event.preventDefault();
+    const baseUrl = window.location.hostname === 'adverot-growth-tools.netlify.app' ? process.env.PRODUCTION_URL : process.env.LOCAL_URL;
     const resultat = document.getElementById('resultat');
     const prenom = document.getElementById('prenom').value;
     const nom = document.getElementById('nom').value;
@@ -11,7 +14,6 @@ document.getElementById('email-checker').addEventListener('submit', async (event
     resultat.className = 'spinner-border';
     let message = '';
     let alertType = '';
-
     const domainPattern = /^(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
     if (!domainPattern.test(domain)) {
         message = "Domaine invalide";
@@ -19,7 +21,7 @@ document.getElementById('email-checker').addEventListener('submit', async (event
     } else {
         const mails = buildMails(removeAccents(prenom), removeAccents(nom));
         const mailsQuery = mails.map(mail => `mails=${encodeURIComponent(mail)}`).join('&');
-        const url = `https://adverot-growth-tools.netlify.app/.netlify/functions/findMail?${mailsQuery}&domain=${encodeURIComponent(domain)}`;
+        const url = `${baseUrl}?${mailsQuery}&domain=${encodeURIComponent(domain)}`;
         const response = await fetch(url).then(response => response.json());
         switch (response.mxStatus) {
             case 'NO_MX':

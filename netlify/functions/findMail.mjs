@@ -13,6 +13,7 @@ export const handler = async (event, context) => {
             mxStatus = 'NO_MX';
         } else {
             const pingData = await ping('adrien.verot@' + domain);
+            console.log(pingData);
             if (pingData.status !== 'INVALID') {
                 mxStatus = 'ACCEPT_ALL';
             } else {
