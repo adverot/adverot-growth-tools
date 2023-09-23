@@ -12,7 +12,7 @@ export const handler = async (event, context) => {
         if (!legitData.isValid || legitData.mxArray.length === 0) {
             mxStatus = 'NO_MX';
         } else {
-            const pingData = await ping('adrien.verot@' + domain, {timeout: 5000});
+            const pingData = await ping('adrien.verot@' + domain);
             console.log(pingData);
             if (pingData.status !== 'INVALID') {
                 mxStatus = 'ACCEPT_ALL';
