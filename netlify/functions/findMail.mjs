@@ -9,6 +9,7 @@ export const handler = async (event, context) => {
 
     try {
         const legitData = await legit('adrien.verot@' + domain);
+        console.log(legitData);
         if (!legitData.isValid || legitData.mxArray.length === 0) {
             mxStatus = 'NO_MX';
         } else {
