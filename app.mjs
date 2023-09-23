@@ -1,11 +1,9 @@
 import buildMails from './utils/buildMails.js';
 import removeAccents from './utils/removeAccents.js';
-import dotenv from 'dotenv';
-dotenv.config();
 
 document.getElementById('email-checker').addEventListener('submit', async (event) => {
     event.preventDefault();
-    const baseUrl = window.location.hostname === 'adverot-growth-tools.netlify.app' ? process.env.PRODUCTION_URL : process.env.LOCAL_URL;
+    const baseUrl = window.location.hostname === 'localhost' ? 'http://localhost:8888/.netlify/functions/findMail' : 'https://adverot-growth-tools.netlify.app/.netlify/functions/findMail';
     const resultat = document.getElementById('resultat');
     const prenom = document.getElementById('prenom').value;
     const nom = document.getElementById('nom').value;

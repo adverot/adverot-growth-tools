@@ -1,9 +1,10 @@
 {
+  "scripts": {
+    "start": "node -r esm app.mjs"
+  },
+  
   "dependencies": {
     "legit": "^1.0.9",
     "smtp-ping": "^1.0.0"
-  },
-  "devDependencies": {
-    "dotenv": "^16.3.1"
   }
 }
